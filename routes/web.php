@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::get('about', function () {
+    return view('pages.about');
+});
+
+Route::get('contact', function () {
+    return view('pages.contact');
+});
+
+Route::get('gallary', function () {
+    return view('pages.gallary');
+});
+
+Route::get('disclaimer', function () {
+    return view('pages.disclaimer');
+});
+
+Route::get('download', function () {
+    return view('pages.download');
+});

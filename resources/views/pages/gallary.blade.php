@@ -1,0 +1,1 @@
+<h1>Gallary page</h1>
