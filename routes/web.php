@@ -34,3 +34,7 @@ Route::get('disclaimer', function () {
 Route::get('download', function () {
     return view('pages.download');
 });
+
+
+Route::get('register', 'RegistrationController@create');
+Route::get('login', 'SessionsController@create');
