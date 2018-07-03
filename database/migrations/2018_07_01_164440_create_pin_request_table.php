@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePinsTable extends Migration
+class CreatePinRequestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreatePinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pins', function (Blueprint $table) {
+        Schema::create('pin_requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pin_no')->unique();
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('pin_type_id');
-            $table->integer('user_id')->nullable();
-            $table->integer('claimed');
+            $table->integer('quantity');
+            $table->integer('status')->defaults(0);
+            $table->string('transaction_no');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreatePinsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Pins');
+        Schema::dropIfExists('pin_requests');
     }
 }

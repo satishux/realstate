@@ -31,4 +31,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function pin_transfered() {
+        return $this->hasMany(PinTransfer::class, 'sender_id');
+    }
+
+    public function pin_recived() {
+        return $this->hasMany(PinTransfer::class, 'reciver_id');
+    }
 }

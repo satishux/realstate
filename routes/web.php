@@ -38,9 +38,12 @@ Route::get('download', function () {
 Route::get('app/dashboard', 'AppController@index')->name('dashboard');
 Route::get('app/pin', 'PinsController@index')->name('my_pin');
 Route::get('app/pin/recived', 'PinsController@recived')->name('recived_pin');
+
+Route::get('app/pin/request', 'PinsController@request')->name('request_pin');
+Route::post('app/pin/request', 'PinsController@post_request')->name('post_request_pin');
+
 Route::get('app/pin/transfer', 'PinsController@transfer')->name('transfer_pin');
-Route::get('app/pin/request', 'PinsController@request')->name('request_pin');
-Route::get('app/pin/request', 'PinsController@request')->name('request_pin');
+Route::post('app/pin/transfer', 'PinsController@post_transfer')->name('post_transfer_pin');
 
 Route::get('app/pin/generate', 'PinsController@generate')->name('generate_pin');
 Route::post('app/pin/generate', 'PinsController@post_generate')->name('post_generate_pin');

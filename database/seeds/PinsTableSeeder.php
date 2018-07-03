@@ -18,8 +18,9 @@ class PinsTableSeeder extends Seeder
         foreach($pin_types as $pin_type) {
 
             DB::table('pins')->insert([
-                'pin_no' => rand(1111,9999),
+                'pin_no' => rand(111111,999999),
                 'pin_type_id' => $pin_type,
+                'user_id' => 2,
                 'claimed' => 0,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()       
