@@ -6,6 +6,30 @@
 
 
 @section('content')
+
+@if( session('status') )
+<div class="m-protlet">
+    <div class="m-portlet_body">
+            <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
+                <div class="m-alert__icon">
+                    <i class="flaticon-exclamation-1"></i>
+                    <span></span>
+                </div>
+                <div class="m-alert__text">
+                    <strong>
+                        Pin Generated!
+                    </strong>
+                    Generated Pin ID : {{ session('pin_no') }}
+                </div>
+                <div class="m-alert__close">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+    </div>
+</div>
+@endif
+
+
 <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -88,6 +112,9 @@
                                             <th>
                                                 Transaction No
                                             </th>
+                                            <th>
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -122,6 +149,28 @@
                                             </td>
                                             <td>
                                                 {{ $pin->transaction_no }}
+                                            </td>
+                                            <td>
+                                                <div class="m-form__actions">
+                                                <form class="d-inline" action="{{ route('post_approve_pin') }}" method="post">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value="{{ $pin->id }}" >
+                                                    <input type="hidden" name="transaction_no" value="{{ $pin->transaction_no }}" >
+                                                    <button type="submit" id="approve_btn" class="btn btn-primary">
+                                                        Approve
+                                                    </button>
+                                                </form>
+
+                                                <form class="d-inline" action="{{ route('post_reject_pin') }}" method="post">
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" name="id" value="{{ $pin->id }}" >
+                                                    <input type="hidden" name="transaction_no" value="{{ $pin->transaction_no }}" >
+                                                    <button type="submit" id="reject_btn" class="btn btn-danger">
+                                                        Reject
+                                                    </button>
+                                                </form>
+                                                </div>
+
                                             </td>
 
                                         </tr>

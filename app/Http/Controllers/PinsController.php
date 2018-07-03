@@ -107,7 +107,7 @@ class PinsController extends AppController
 
     public function post_request(Request $request) {
         
-        $erros = new MessageBag();
+        $errors = new MessageBag();
 
         $data = [
             'user_id' => Auth::id(),
@@ -129,6 +129,44 @@ class PinsController extends AppController
         return redirect()->back()->with('status', 'Pins requested successfully');
     }
 
+    public function post_approve_pin( Request $request ) {
+        $id = $request->get('id');
+        $trans_no = $request->get('transaction_no');
+
+        $pin_request = PinRequest::find($id);
+        $pins = [];
+
+        $data = [
+            'user_id' => $pin_request->user_id,
+            'pin_type_id' => $pin_request->pin_type_id,
+            'claimed' => 1,
+            'length' => 0
+        ];
+
+        for($i = 0; $i < $pin_request->quantity; $i++) {
+
+            $data['length'] = $i;
+
+            $pin = $this->pin_generate($data);
+            if ($pin) {
+                $pins[] = $pin->pin_no;
+            }
+            
+        }
+
+        // update pin request record after approval as well
+
+
+        return redirect()->back()->with('status', 'Pins Generated')
+                                ->with('pin_no', implode(', ', $pins));
+
+        
+    }
+
+    public function poser_reject_pin( Request $request ) {
+
+    }
+ 
     public function generate() {
 
         $pin_types = PinType::all();
@@ -136,18 +174,55 @@ class PinsController extends AppController
         return view('app.pin.generate', [ 'pin_types' =>  $pin_types]);
     }
 
+    protected function pin_generate($data) {
+
+        
+        try{
+            
+            $pin = new Pin();
+            $pin->pin_no = Carbon::now()->timestamp + $data['length'];
+            $pin->pin_type_id = $data['pin_type_id'];
+            $pin->user_id = $data['user_id'];
+            $pin->claimed = $data['claimed'];
+            $pin->save();
+            return $pin;
+            
+        } catch( \Exception $e) {
+
+            return false;
+        }
+
+    }
+
     public function post_generate(Request $request) {
         $errors = new MessageBag();
         
         $user_id = $request->get('user_id');
 
-        $pin_no = rand(100000, 999999);
+        // $pin_no = rand(100000, 999999);
 
-        $pin = new Pin();
+        // $pin = new Pin();
 
-        $pin->pin_no = $pin_no;
-        $pin->pin_type_id = $request->get('pin_type');
+        // $pin->pin_no = $pin_no;
+        // $pin->pin_type_id = $request->get('pin_type');
         
+        // if ( !$user_id == null ) {
+        //     $user = User::find($user_id);
+            
+        //     if ( ! $user) {
+
+
+        //         $errors->add('error', 'Please provide correct user ID');
+        //         return redirect()->back()->withErrors($errors);
+        //     }
+
+        //     $pin->user_id = $user->id;
+        // } else {
+        //     $pin->user_id = Auth::id();
+        // }
+
+        // $pin->claimed = 0;
+        // $status = $pin->save();
         if ( !$user_id == null ) {
             $user = User::find($user_id);
             
@@ -158,15 +233,21 @@ class PinsController extends AppController
                 return redirect()->back()->withErrors($errors);
             }
 
-            $pin->user_id = $user->id;
+            $user_id = $user->id;
         } else {
-            $pin->user_id = Auth::id();
+            $user_id = Auth::id();
         }
 
-        $pin->claimed = 0;
-        $status = $pin->save();
+        $data = [
+            'user_id' => $user_id,
+            'pin_type_id' => $request->get('pin_type'),
+            'claimed' => 0,
+            'length' => 0
+        ];
 
-        if ( ! $status ) {
+        $pin = $this->pin_generate($data);
+
+        if ( ! $pin ) {
             $errors->add('error', 'Could not generate Pin');
 
             return redirect()->back()->withErrors($errors);

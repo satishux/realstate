@@ -41,6 +41,8 @@ Route::get('app/pin/recived', 'PinsController@recived')->name('recived_pin');
 
 Route::get('app/pin/request', 'PinsController@request')->name('request_pin');
 Route::post('app/pin/request', 'PinsController@post_request')->name('post_request_pin');
+Route::post('app/pin/request/approve', 'PinsController@post_approve_pin')->name('post_approve_pin');
+Route::post('app/pin/request/reject', 'PinsController@post_reject_pin')->name('post_reject_pin');
 
 Route::get('app/pin/transfer', 'PinsController@transfer')->name('transfer_pin');
 Route::post('app/pin/transfer', 'PinsController@post_transfer')->name('post_transfer_pin');
