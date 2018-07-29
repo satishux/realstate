@@ -47,62 +47,19 @@
 													</span>
 												</span>
 											</li>
+
+											@foreach($placement_menus as $menu)
 											<li class="m-menu__item " aria-haspopup="true" >
-												<a  href="components/base/state.html" class="m-menu__link ">
+												<a  href="{{ route($menu['link']) }}" class="m-menu__link ">
 													<i class="m-menu__link-bullet m-menu__link-bullet--dot">
 														<span></span>
 													</i>
 													<span class="m-menu__link-text">
-														Right Leg
+														{{ $menu['title'] }}
 													</span>
 												</a>
 											</li>
-
-											<li class="m-menu__item " aria-haspopup="true" >
-												<a  href="components/base/state.html" class="m-menu__link ">
-													<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-														<span></span>
-													</i>
-													<span class="m-menu__link-text">
-														Left Leg
-													</span>
-												</a>
-											</li>
-
-											<li class="m-menu__item " aria-haspopup="true" >
-												<a  href="components/base/state.html" class="m-menu__link ">
-													<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-														<span></span>
-													</i>
-													<span class="m-menu__link-text">
-														My Directs
-													</span>
-												</a>
-											</li>
-
-											<li class="m-menu__item " aria-haspopup="true" >
-												<a  href="components/base/state.html" class="m-menu__link ">
-													<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-														<span></span>
-													</i>
-													<span class="m-menu__link-text">
-														Binary Tree
-													</span>
-												</a>
-											</li>
-
-											<li class="m-menu__item " aria-haspopup="true" >
-												<a  href="components/base/state.html" class="m-menu__link ">
-													<i class="m-menu__link-bullet m-menu__link-bullet--dot">
-														<span></span>
-													</i>
-													<span class="m-menu__link-text">
-														Sponsor Tree
-													</span>
-												</a>
-											</li>
-
-											
+											@endforeach
 										</ul>
 									</div>
 								</li>

@@ -55,6 +55,11 @@ Route::get('app/reward_income', 'AppController@reward_income')->name('reward_inc
 Route::get('app/total_payout', 'AppController@total_payout')->name('total_payout');
 
 
+Route::get('app/placement/right_leg', 'TreeController@right_leg')->name('right_leg');
+Route::get('app/placement/left_leg', 'TreeController@left_leg')->name('left_leg');
+Route::get('app/tree/directs', 'TreeController@directs')->name('direct_tree');
+Route::get('app/tree/binary_tree', 'TreeController@binary_tree')->name('binary_tree');
+
 Route::get('register', 'RegistrationController@create');
 Route::post('register', 'RegistrationController@store');
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 class AppController extends Controller
 {
     public $account_menus;
+    public $placement_menus;
 
     public function __construct(){
         $this->middleware('auth');
@@ -47,11 +48,31 @@ class AppController extends Controller
             ]
         ];
 
+        $this->placement_menus = [
+            [
+                'title' => 'Right Leg',
+                'link'  => 'right_leg'
+            ],
+            [
+                'title' => 'Left Leg',
+                'link'  => 'left_leg'
+            ],
+            [
+                'title' => 'My Directs',
+                'link'  => 'direct_tree'
+            ],
+            [
+                'title'  => 'Binary Tree',
+                'link'  => 'binary_tree'
+            ]
+        ];
+
         View::share('account_menus', $this->account_menus);
+        View::share('placement_menus', $this->placement_menus);
     }
 
     public function index() {
-        return view('app.home', ['account_menus' => $this->account_menus]);
+        return view('app.home');
     }
 
     public function direct_income() {

@@ -121,8 +121,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                             Position:*
                                         </label>
                                         <select name="position" class="form-control m-input m-input--square">
-                                            <option value="1">Left</option>
-                                            <option value="2">Right</option>
+                                            <option value="Left">Left</option>
+                                            <option value="Right">Right</option>
                                         </select>
 
                                         <span class="m-form__help">
@@ -131,7 +131,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label>
                                             Full Name:
                                         </label>
@@ -140,7 +140,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                             Please enter your full name
                                         </span>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
+                                        <label>
+                                            User Name:
+                                        </label>
+                                        <input name="username" type="text" class="form-control m-input" placeholder="Enter user name">
+                                        <span class="m-form__help">
+                                            Please enter user name ( no spaces allowed )
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-4">
                                         <label class="">
                                             Contact Number:
                                         </label>
@@ -190,10 +199,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                             Marital Status:*
                                         </label>
                                         <select name="marital_status" class="form-control m-input m-input--square">
-                                            <option value="1">Single</option>
-                                            <option value="2">Married</option>
-                                            <option value="2">Widow</option>
-                                            <option value="2">Divorced</option>
+                                            <option value="Single">Single</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Widow">Widow</option>
+                                            <option value="Divorced">Divorced</option>
                                         </select>
 
                                         <span class="m-form__help">

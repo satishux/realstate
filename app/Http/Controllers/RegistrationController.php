@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Tree;
 use Illuminate\Support\Facades\Hash;
 use App\PinType;
 
@@ -43,11 +44,44 @@ class RegistrationController extends Controller
 
 
         try {
-            $status = User::create($data);
+            $user = User::create($data);
         } catch( \Exception $e) {
             dd($e->getMessage());
         }
 
-        dd($status);
+        
+
+
+        if ( $user ) {
+
+            $parent = Tree::where('user_id', $user->parent_id)->first();
+            $depth = $parent->depth;
+
+
+
+            $data = [
+               'user_id' => $user->id,
+               'parent_id' => $user->parent_id,
+               'depth' => $depth + 1
+
+            ];
+
+            try {
+                $tree_user =  Tree::create($data);
+
+                if (request()->get('position') == 'Left') {
+                    $parent->left = $user->id;
+                } else {
+                    $parent->right = $user->id;
+                }
+
+                $parent->save();
+
+            } catch ( \Exception $e ) {
+                dd( $e->getMessage());
+            }
+
+            dd($tree_user);
+        }
     }
 }

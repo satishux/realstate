@@ -64,8 +64,9 @@ class UsersTableSeeder extends Seeder
                 'city' => $user['city'],
                 'contact_no' => rand(1111111111,9999999999),
                 'position' => $position[array_rand($position, 1)],
-                'sponsor_id' => rand(1111,9999),
-                'parent_id' => rand(1111,9999),
+                'sponsor_id' => 1,
+                'parent_id' => 1,
+                // 'parent_id' => rand(1111,9999),
                 'role_id' => $user['role_id'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
