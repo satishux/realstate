@@ -39,6 +39,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<link href="/dashboard/demo/default/base/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Base Styles -->
 		<link rel="shortcut icon" href="/dashboard/demo/default/media/img/logo/favicon.ico" />
+		@yield('styles')
 	</head>
 	<!-- end::Head -->
     <!-- end::Body -->
@@ -199,6 +200,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<script src="/dashboard/demo/default/custom/components/base/toastr.js" type="text/javascript"></script>
 
+		@yield('scripts')
 		@yield('toastr')
 	</body>
 	<!-- end::Body -->

@@ -24,11 +24,26 @@ class TreeController extends AppController
 
         $tree_user = Tree::where('user_id', Auth::user()->id)->first();
 
+        if ( ! $tree_user ) {
+            dd('user not found');
+        }
+
+
+        if(! isset($tree_user->left)) {
+            
+          dd('no user tree found');  
+        }
+        
+        
         $left_child = User::find($tree_user->left);
 
-        dd($left_child);
+        dd($left_child->id);
+
+
+        return view('app.placement.left_leg');
 
     }
+
 
     public function directs() {
         $tree_user = Tree::where('user_id', Auth::user()->id)->first();
